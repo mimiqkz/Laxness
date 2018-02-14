@@ -1,18 +1,28 @@
 package teymi17.laxness;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.text.DateFormat;
 import java.util.Date;
 
 /**
  * Created by meatyminx on 14/02/2018.
  */
-
+@Entity
 public class Quote {
 
+    @PrimaryKey
+    private int uid;
+
+    @ColumnInfo(name= "text")
     private String text;
     // novel could be an object type
+    @ColumnInfo(name="novel")
     private String novel;
     //Temporary
+    @ColumnInfo(name="year")
     private int year;
 
     public Quote(String text, String novel, int year) {
