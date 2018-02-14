@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @Dao
-public interface UserDao {
+public interface QuoteDao {
     @Query("SELECT * FROM user")
     List<Quote> getAll();
 
