@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="teymi17.laxness">
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>﻿
 
     <application
         android:allowBackup="true"
@@ -23,6 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NotificationActivity"
+            android:label="Notification"/>
+
+        <receiver android:name=".NotificationReceiver">
+            <intent-filter>
+                <action android:name="Team17.Laxness.DISPLAY_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
