@@ -3,6 +3,9 @@ package teymi17.laxness;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
+import teymi17.laxness.model.Quote;
+import teymi17.laxness.model.QuoteDao;
+
 /**
  * Created by harry on 14/02/2018.
  */

@@ -1,4 +1,4 @@
-package teymi17.laxness;
+package teymi17.laxness.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

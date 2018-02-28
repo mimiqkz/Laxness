@@ -18,17 +18,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashActivity">
+            android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".NotificationActivity"
+            android:name=".control.NotificationActivity"
             android:label="Notification"/>
 
-        <receiver android:name=".NotificationReceiver">
+        <receiver android:name=".control.NotificationReceiver">
             <intent-filter>
                 <action android:name="Team17.Laxness.DISPLAY_NOTIFICATION"/>
             </intent-filter>

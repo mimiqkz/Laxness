@@ -1,4 +1,4 @@
-package teymi17.laxness;
+package teymi17.laxness.model;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -6,6 +6,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
+
+import teymi17.laxness.model.Quote;
 
 /**
  * Created by harry on 14/02/2018.

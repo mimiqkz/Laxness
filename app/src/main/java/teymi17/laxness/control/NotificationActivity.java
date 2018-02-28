@@ -1,4 +1,4 @@
-package teymi17.laxness;
+package teymi17.laxness.control;
 
 import android.app.Activity;
 

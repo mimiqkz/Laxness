@@ -1,9 +1,12 @@
-package teymi17.laxness;
+package teymi17.laxness.view;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import teymi17.laxness.MainActivity;
+import teymi17.laxness.R;
 
 /**
  * Created by meatyminx on 14/02/2018.
