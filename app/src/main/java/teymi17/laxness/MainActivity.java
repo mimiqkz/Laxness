@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private Quote quoteOfTheDay;
 
     //View Variables
+    Button shareButton;
     private TextView mQuoteText;
     private TextView mQuoteNovel;
     private TextView mQuoteDate;
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         calendar.set(Calendar.MINUTE,0);
         calendar.set(Calendar.SECOND,0);
 
-        Intent intent = new Intent("Team17.Laxness.DISPLAY_NOTIFICATION");
+        final Intent intent = new Intent("Team17.Laxness.DISPLAY_NOTIFICATION");
         PendingIntent broadcast = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         //alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), broadcast);
@@ -52,6 +55,21 @@ public class MainActivity extends AppCompatActivity {
         mQuoteNovel.setText(quoteOfTheDay.getNovel());
         mQuoteDate.setText(" " + String.valueOf(quoteOfTheDay.getYear()));
 
+        shareButton = (Button)findViewById(R.id.shareButton);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareQuote = quoteOfTheDay.getText() +" \t\t "+ quoteOfTheDay.getNovel() + " " + String.valueOf(quoteOfTheDay.getYear());
+                String shareNovel = quoteOfTheDay.getNovel();
+                String shareDate = " " + String.valueOf(quoteOfTheDay.getYear());
+                myIntent.putExtra(intent.EXTRA_SUBJECT,"Laxness, tilvitnun dagsins");
+                myIntent.putExtra(Intent.EXTRA_TEXT,shareQuote);
+                startActivity(Intent.createChooser(myIntent,"Share using"));
+
+            }
+        });
 
 
 
