@@ -7,6 +7,8 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 
 import teymi17.laxness.MainActivity;
@@ -32,9 +34,12 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"100");
 
-        Notification notification = builder.setContentTitle("Your Daily Quote")
-                .setContentText("From Halli Lax")
-                .setTicker("You have a new quote")
+     //   Bitmap logo = BitmapFactory.decodeResource(context.getResources(),
+     //           R.drawable.ic_laxness);
+        Notification notification = builder.setContentTitle("Tilvitnun dagsins")
+                .setContentText("Þú hefur fengið nýja tilvitnun frá Halldór Laxness")
+                .setTicker("Tilvitnun dagsins")
+                //.setLargeIcon(logo)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent).build();

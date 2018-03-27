@@ -1,14 +1,22 @@
 package teymi17.laxness;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Calendar;
 
 import teymi17.laxness.model.Quote;
@@ -22,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mQuoteText;
     private TextView mQuoteNovel;
     private TextView mQuoteDate;
+    File imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent broadcast = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         //alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), broadcast);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,broadcast);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,broadcast);
 
         //Call function that finds and sets quote
         quoteOfTheDay = new Quote("Dáið er alt án drauma; og dapur heimurinn.", "Barn náttúrunnar,", 1919);
@@ -59,7 +68,12 @@ public class MainActivity extends AppCompatActivity {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                Bitmap bitmap = takeScreenshot();
+                saveBitmap(bitmap);
+                shareIt();
+
+
+                /*Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
                 String shareQuote = quoteOfTheDay.getText() +" \t\t "+ quoteOfTheDay.getNovel() + " " + String.valueOf(quoteOfTheDay.getYear());
                 String shareNovel = quoteOfTheDay.getNovel();
@@ -67,12 +81,40 @@ public class MainActivity extends AppCompatActivity {
                 myIntent.putExtra(intent.EXTRA_SUBJECT,"Laxness, tilvitnun dagsins");
                 myIntent.putExtra(Intent.EXTRA_TEXT,shareQuote);
                 startActivity(Intent.createChooser(myIntent,"Share using"));
-
+*/
             }
         });
 
 
 
+
+    }
+    public Bitmap takeScreenshot(){
+        View rootView =findViewById(android.R.id.content).getRootView();
+        rootView.setDrawingCacheEnabled(true);
+        return rootView.getDrawingCache();
+    }
+    private void saveBitmap(Bitmap bitmap) {
+        imagePath = new File(Environment.getExternalStorageDirectory() + "/screenshot.png");
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(imagePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            Log.e("GREC", e.getMessage(),e);
+        }catch (IOException e){
+            Log.e("GREC", e.getMessage(), e);
+        }
+    }
+    private void shareIt(){
+        Uri uri = Uri.fromFile(imagePath);
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("image/*");
+        sharingIntent.putExtra(Intent.EXTRA_STREAM,uri);
+
+        startActivity(Intent.createChooser(sharingIntent,"Share via"));
     }
 
 

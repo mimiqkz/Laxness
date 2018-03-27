@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="teymi17.laxness">
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>﻿
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -24,9 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".control.NotificationActivity"
-            android:label="Notification"/>
 
         <receiver android:name=".control.NotificationReceiver">
             <intent-filter>
