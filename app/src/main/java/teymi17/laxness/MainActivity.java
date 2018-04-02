@@ -77,9 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Call function that finds and sets quote
         quoteOfTheDay = new Quote("dddddd dapur heimurinn.", "Barn ssssss,", "19");
-        System.out.println("============================");
         getQoute(1);
-        System.out.println("============================");
         mQuoteText = (TextView) findViewById(R.id.quote_text);
         mQuoteNovel = (TextView) findViewById(R.id.quote_novel);
         mQuoteDate = (TextView) findViewById(R.id.quote_date);
@@ -87,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         mQuoteText.setText(quoteOfTheDay.getText());
         mQuoteNovel.setText(quoteOfTheDay.getNovel());
         mQuoteDate.setText(" " + String.valueOf(quoteOfTheDay.getYear()));
+        getQoute(1);
 
         shareButton = (Button)findViewById(R.id.shareButton);
         shareButton.setOnClickListener(new View.OnClickListener() {
@@ -106,12 +105,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * takes in id and gets data from api
+     * and then renders sed data
+     * @param id
+     */
     private void getQoute(int id) {
         String qouteUrl = "https://laxnessapi.herokuapp.com/api/" + id;
         System.out.println(qouteUrl);
         if (isNetworkAvailable()) {
             System.out.println("ping1");
-            toggleRefresh();
+            // toggleRefresh();
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(qouteUrl)
@@ -126,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            toggleRefresh();
+                            // toggleRefresh();
                         }
                     });
                     alertUserAboutError();
@@ -139,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            toggleRefresh();
                         }
                     });
                     try {
@@ -172,8 +175,7 @@ public class MainActivity extends AppCompatActivity {
             // Toast.makeText(this, R.string.network_unavailable_message, Toast.LENGTH_LONG).show();
         }
     }
-
-    private void toggleRefresh() {
+    /*private void toggleRefresh() {
       /* if(mQuoteText.getVisibility()== View.INVISIBLE){
            mQuoteText.setVisibility(View.INVISIBLE);
            mQuoteNovel.setVisibility(View.INVISIBLE);
@@ -184,9 +186,13 @@ public class MainActivity extends AppCompatActivity {
            mQuoteText.setVisibility(View.VISIBLE);
            mQuoteDate.setVisibility(View.VISIBLE);
 
-       }*/
-    }
+       }
+    }*/
 
+    /**
+     * function thets checs for network avalibility
+     * @return true if there is network avalable
+     */
     private boolean isNetworkAvailable() {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
@@ -194,11 +200,21 @@ public class MainActivity extends AppCompatActivity {
         if(networkInfo!= null && networkInfo.isConnected()) isAvailable = true;
         return isAvailable;
     }
+    /*
+    fix this maby
+     */
     private void alertUserAboutError() {
         // AlertDialogFragment dialog = new AlertDialogFragment();
         // dialog.show(getFragmentManager(), "error_dialog");
         System.out.println("Alert");
     }
+
+    /**
+     * gets json data
+     * @param jsonData
+     * @return the qoute that is in the data
+     * @throws JSONException
+     */
     private Quote parseQouteDetails(String jsonData) throws JSONException{
         Quote quote = new Quote();
         System.out.println(jsonData.length());
@@ -208,21 +224,46 @@ public class MainActivity extends AppCompatActivity {
 
         return quote;
     }
+
+    /**
+     * gets the novel name form json
+     * @param jsonData
+     * @return
+     * @throws JSONException
+     */
     private String getNovelName(String jsonData) throws JSONException{
-        JSONObject qoute = new JSONObject(jsonData.substring(1,jsonData.length()-1));
+        JSONObject qoute = new JSONObject(jsonData);
         String novel = qoute.getString("book");
         return  novel;
     }
+
+    /**
+     * gets the year from json
+     * @param jsonData
+     * @return
+     * @throws JSONException
+     */
     private  String getYearQoute(String jsonData) throws JSONException{
-        JSONObject qoute = new JSONObject(jsonData.substring(1,jsonData.length()-1));
+        JSONObject qoute = new JSONObject(jsonData);
         String year = qoute.getString("year");
         return  year;
     }
+
+    /**
+     * gets the qoute from json
+     * @param jsonData
+     * @return
+     * @throws JSONException
+     */
     private String getTextQoute(String jsonData) throws JSONException {
-        JSONObject qoute = new JSONObject(jsonData.substring(1,jsonData.length()-1));
+        JSONObject qoute = new JSONObject(jsonData);
         String theQoute = qoute.getString("quote");
         return  theQoute;
     }
+
+    /**
+     * updates the display
+     */
     private void updateDisplay() {
         mQuoteText = (TextView) findViewById(R.id.quote_text);
         mQuoteNovel = (TextView) findViewById(R.id.quote_novel);
