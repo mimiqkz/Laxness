@@ -31,5 +31,8 @@ dependencies {
 
     // ReactiveStreams support for LiveData
     implementation "android.arch.lifecycle:reactivestreams:1.1.0"
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 
 }

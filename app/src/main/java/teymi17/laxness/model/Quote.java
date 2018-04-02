@@ -23,12 +23,14 @@ public class Quote {
     private String novel;
     //Temporary
     @ColumnInfo(name="year")
-    private int year;
+    private String year;
 
-    public Quote(String text, String novel, int year) {
+    public Quote(String text, String novel, String year) {
         this.text = text;
         this.novel = novel;
         this.year = year;
+    }
+    public Quote() {
     }
 
     public String getNovel() {
@@ -39,11 +41,11 @@ public class Quote {
         this.novel = novel;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
