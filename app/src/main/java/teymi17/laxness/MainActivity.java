@@ -143,40 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public Bitmap takeScreenshot(){
-        View rootView =findViewById(android.R.id.content).getRootView();
-        rootView.setDrawingCacheEnabled(true);
-        return rootView.getDrawingCache();
-    }
-    private void saveBitmap(Bitmap bitmap) {
-        imagePath = new File(Environment.getExternalStorageDirectory() + "/screenshot.png");
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(imagePath);
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,fos);
-            fos.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            Log.e("GREC", e.getMessage(),e);
-        }catch (IOException e){
-            Log.e("GREC", e.getMessage(), e);
-        }
-    }
-    private void shareIt(){
-        Uri uri = Uri.fromFile(imagePath);
-        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-        sharingIntent.setType("image/*");
-        sharingIntent.putExtra(Intent.EXTRA_STREAM,uri);
 
-        startActivity(Intent.createChooser(sharingIntent,"Share via"));
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // toggleRefresh();
-                        }
-                    });
-                    alertUserAboutError();
-                }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
@@ -314,6 +281,42 @@ public class MainActivity extends AppCompatActivity {
         mQuoteText.setText(quoteOfTheDay.getText());
         mQuoteNovel.setText(quoteOfTheDay.getNovel());
         mQuoteDate.setText(" " + String.valueOf(quoteOfTheDay.getYear()));
+    }
+
+    public Bitmap takeScreenshot(){
+        View rootView =findViewById(android.R.id.content).getRootView();
+        rootView.setDrawingCacheEnabled(true);
+        return rootView.getDrawingCache();
+    }
+    private void saveBitmap(Bitmap bitmap) {
+        imagePath = new File(Environment.getExternalStorageDirectory() + "/screenshot.png");
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(imagePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            Log.e("GREC", e.getMessage(),e);
+        }catch (IOException e){
+            Log.e("GREC", e.getMessage(), e);
+        }
+    }
+    private void shareIt(){
+        Uri uri = Uri.fromFile(imagePath);
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("image/*");
+        sharingIntent.putExtra(Intent.EXTRA_STREAM,uri);
+
+        startActivity(Intent.createChooser(sharingIntent,"Share via"));
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // toggleRefresh();
+            }
+        });
+        alertUserAboutError();
+
     }
 }
 
