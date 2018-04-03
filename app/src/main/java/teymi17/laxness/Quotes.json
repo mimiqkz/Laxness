@@ -3,42 +3,122 @@
     {
       "quote": "Sem braskari lifirðu á blóði náúngans, sem bóndi hjálparðu honum til þess að lifa.",
       "year": "",
-      "book": "Barn náttúrunnar"
+      "book": "Barn náttúrunnar",
+      "id:": 1,
     },
     {
       "quote": "Dáið er alt án drauma; og dapur heimurinn.",
       "year": "1919",
-      "book": "Barn náttúrunnar"
+      "book": "Barn náttúrunnar",
+      "id:": 2,
     },
     {
       "quote": "Gættu þín fyrir náttúrunni, því þótt hún sé fögur, þá er hún ekki miskunnsöm.",
       "year": "1919",
-      "book": "Barn náttúrunnar"
+      "book": "Barn náttúrunnar",
+      "id:": 3,
     },
     {
-      "quote": "Veröldin er einsog nótt í Róm. Göturnar liggja hver um aðra þvera, hver veit hvert? Sumir sofa; sumir vaka; sumir eru að fæðast, aðrir að deya.",
+      "quote": "Stundum finst mér dauðinn einn sé veruleikur, en hitt blekkíng!",
       "year": "1927",
-      "book": "Vefarinn mikli frá Kasmír"
+      "book": "Vefarinn mikli frá Kasmír",
+      "id:": 4,
+    },
+    {
+      "quote": "Ekkert er í ríki náttúrunnar jafnfjarri því að vera yfirnáttúrlegt einsog kraftaverk. Ekkert er yfirnáttúrlegra en náttúran sjálf.",
+      "year": "1927",
+      "book": "Vefarinn mikli frá Kasmír",
+      "id:": 4,
+    },
+    {
+      "quote": "Konan er ekki aðeins móðir mannanna, heldur dýrlínganna, jafnvel Jesú Krists sjálfs.",
+      "year": "1927",
+      "book": "Vefarinn mikli frá Kasmír",
+      "id:": 4,
+    },
+    {
+      "quote": "Fæstir offra einni nótt ævi sinnar til að vaka frammifyrir augliti drottins; flestir offra konunni öllum nóttum manndómsára sinna.",
+      "year": "1927",
+      "book": "Vefarinn mikli frá Kasmír",
+      "id:": 4,
+    },
+    {
+      "quote": "Guði verður ekki fremur þjónað með múnklífi en ljóðagerð. Maðurinn sigrast ekki fremur á ófullkomnun sinni með múnklífi en með kveðskap.",
+      "year": "1927",
+      "book": "Vefarinn mikli frá Kasmír",
+      "id:": 4,
+    },
+    {
+      "quote": "Merkasta uppfundníng á jörðu er drottinn. Rafmagnið er hégómi í samanburði við hann. ",
+      "year": "1927",
+      "book": "Vefarinn mikli frá Kasmír",
+      "id:": 4,
     },
     {
       "quote": "Ég heyri sjaldan svo vonda tónlist að hún segi mér ekki meira en talað orð…",
       "year": "1965",
-      "book": "Upphaf mannúðarstefnu"
+      "book": "Upphaf mannúðarstefnu",
+      "id:": 5
     },
     {
       "quote": "Vitur maður hefur sagt að næst því að missa móður sína sé fátt hollara úngum börnum en missa föður sinn.",
       "year": "1957",
-      "book": "Brekkukotsannáll"
+      "book": "Brekkukotsannáll",
+      "id:": 6
+    },
+    {
+      "quote": "Vitur maður hefur sagt að næst því að missa móður sína sé fátt hollara úngum börnum en missa föður sinn.",
+      "year": "1957",
+      "book": "Brekkukotsannáll",
+      "id:": 6
+    },
+    {
+      "quote": "Vitur maður hefur sagt að næst því að missa móður sína sé fátt hollara úngum börnum en missa föður sinn.",
+      "year": "1957",
+      "book": "Brekkukotsannáll",
+      "id:": 6
+    },
+    {
+      "quote": "Vitur maður hefur sagt að næst því að missa móður sína sé fátt hollara úngum börnum en missa föður sinn.",
+      "year": "1957",
+      "book": "Brekkukotsannáll",
+      "id:": 6
+    },
+    {
+      "quote": "Vitur maður hefur sagt að næst því að missa móður sína sé fátt hollara úngum börnum en missa föður sinn.",
+      "year": "1957",
+      "book": "Brekkukotsannáll",
+      "id:": 6
+    },
+    {
+      "quote": "Vitur maður hefur sagt að næst því að missa móður sína sé fátt hollara úngum börnum en missa föður sinn.",
+      "year": "1957",
+      "book": "Brekkukotsannáll",
+      "id:": 6
+    },
+    {
+      "quote": "Vitur maður hefur sagt að næst því að missa móður sína sé fátt hollara úngum börnum en missa föður sinn.",
+      "year": "1957",
+      "book": "Brekkukotsannáll",
+      "id:": 6
+    },
+    {
+      "quote": "Vitur maður hefur sagt að næst því að missa móður sína sé fátt hollara úngum börnum en missa föður sinn.",
+      "year": "1957",
+      "book": "Brekkukotsannáll",
+      "id:": 6
     },
     {
       "quote": ".. í ástinni getur einginn hjálpað neinum; einginn nema maður sjálfur ...",
       "year": "1934-35",
-      "book": "Sjálfstætt fólk"
+      "book": "Sjálfstætt fólk",
+      "id:": 7
     },
     {
       "quote": "Þar sem jökulinn ber við loft hættir landið að vera jarðneskt, en jörðin fær hlutdeild í himninum, þar búa ekki framar neinar sorgir og þessvegna er gleðin ekki nauðsynleg, þar ríkir fegurðin ein, ofar hverri kröfu.",
       "year": "1937",
-      "book": "Heimsljós - ljós heimsins"
+      "book": "Heimsljós - ljós heimsins",
+      "id:": 8
     }
   ]
 }
