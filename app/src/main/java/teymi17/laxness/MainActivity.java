@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Call function that finds and sets quote
         quoteOfTheDay = new Quote("dddddd dapur heimurinn.", "Barn ssssss,", "19");
-        getQoute(1);
+        getQoute();
         mQuoteText = (TextView) findViewById(R.id.quote_text);
         mQuoteNovel = (TextView) findViewById(R.id.quote_novel);
         mQuoteDate = (TextView) findViewById(R.id.quote_date);
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         mQuoteText.setText(quoteOfTheDay.getText());
         mQuoteNovel.setText(quoteOfTheDay.getNovel());
         mQuoteDate.setText(" " + String.valueOf(quoteOfTheDay.getYear()));
-        getQoute(1);
+        getQoute();
 
         shareButton = (Button)findViewById(R.id.shareButton);
         shareButton.setOnClickListener(new View.OnClickListener() {
@@ -108,10 +108,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * takes in id and gets data from api
      * and then renders sed data
-     * @param id
      */
-    private void getQoute(int id) {
-        String qouteUrl = "https://laxnessapi.herokuapp.com/api/" + id;
+    private void getQoute() {
+        String qouteUrl = "https://laxnessapi.herokuapp.com/api/today";
         System.out.println(qouteUrl);
         if (isNetworkAvailable()) {
             System.out.println("ping1");
