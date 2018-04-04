@@ -38,7 +38,6 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:padding="25dp"
-                android:text="AS salsd asldkj aslkjd lasj dlkasjd alsdj lkasjd lajs dklasjd lkasd jlkasdj lkasjd lkasj dklasj "
                 android:background="@drawable/rounded_with_shadow"
                 android:lineSpacingExtra="6dp"
                 android:textStyle="italic"
@@ -65,8 +64,6 @@
                     android:background="@drawable/quote_info_rounded"
                     android:maxWidth="300dp"
                     android:padding="8dp"
-
-                    android:text="AS salsd asldkj aslk "
                     android:textAlignment="textEnd"
                     android:textColor="#fff"
                     android:textStyle="italic" />
