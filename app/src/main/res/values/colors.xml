@@ -6,4 +6,6 @@
     <color name="brownPrimary">#B18F4D</color>
     <color name="brownSecondary">#AE7914</color>
     <color name="brownTertiary">#653308</color>
+
+    <color name="alphaBlack">#89000000</color>
 </resources>
