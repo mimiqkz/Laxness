@@ -112,14 +112,14 @@ public class MainActivity extends AppCompatActivity {
      * and then renders sed data
      */
     private void getQuote() {
-        String qouteUrl = "https://laxnessapi.herokuapp.com/api/today";
-        System.out.println(qouteUrl);
+        String quoteUrl = "https://laxnessapi.herokuapp.com/api/today";
+        System.out.println(quoteUrl);
         if (isNetworkAvailable()) {
             System.out.println("ping1");
             // toggleRefresh();
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(qouteUrl)
+                    .url(quoteUrl)
                     .build();
 
             Call call = client.newCall(request);
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.v(TAG, jsonData);
                         if (response.isSuccessful()) {
                             System.out.println(jsonData);
-                            quoteOfTheDay = parseQouteDetails(jsonData);
+                            quoteOfTheDay = parseQuoteDetails(jsonData);
                             //We are not on main thread
                             //Need to call this method and pass a new Runnable thread
                             //to be able to update the view.
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            alertUserAboutError();
+                            alertUserAbuoterror();
                         }
                     } catch (IOException e) {
                         Log.e(TAG, "Exception caught: ", e);
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     fix this maby
      */
-    private void alertUserAboutError() {
+    private void alertUserAbuoterror() {
         // AlertDialogFragment dialog = new AlertDialogFragment();
         // dialog.show(getFragmentManager(), "error_dialog");
         System.out.println("Alert");
@@ -195,15 +195,14 @@ public class MainActivity extends AppCompatActivity {
     /**
      * gets json data
      * @param jsonData
-     * @return the qoute that is in the data
+     * @return the quote that is in the data
      * @throws JSONException
      */
-    private Quote parseQouteDetails(String jsonData) throws JSONException{
+    private Quote parseQuoteDetails(String jsonData) throws JSONException{
         Quote quote = new Quote();
-        System.out.println(jsonData.length());
         quote.setNovel(getNovelName(jsonData));
-        quote.setYear(getYearQoute(jsonData));
-        quote.setText(getTextQoute(jsonData));
+        quote.setYear(getYearQuote(jsonData));
+        quote.setText(getTextQuote(jsonData));
 
         return quote;
     }
@@ -215,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
      * @throws JSONException
      */
     private String getNovelName(String jsonData) throws JSONException{
-        JSONObject qoute = new JSONObject(jsonData);
-        String novel = qoute.getString("book");
+        JSONObject quote = new JSONObject(jsonData);
+        String novel = quote.getString("book");
         return  novel;
     }
 
@@ -226,22 +225,22 @@ public class MainActivity extends AppCompatActivity {
      * @return
      * @throws JSONException
      */
-    private  String getYearQoute(String jsonData) throws JSONException{
-        JSONObject qoute = new JSONObject(jsonData);
-        String year = qoute.getString("year");
+    private  String getYearQuote(String jsonData) throws JSONException{
+        JSONObject quote = new JSONObject(jsonData);
+        String year = quote.getString("year");
         return  year;
     }
 
     /**
-     * gets the qoute from json
+     * gets the quote from json
      * @param jsonData
      * @return
      * @throws JSONException
      */
-    private String getTextQoute(String jsonData) throws JSONException {
-        JSONObject qoute = new JSONObject(jsonData);
-        String theQoute = qoute.getString("quote");
-        return  theQoute;
+    private String getTextQuote(String jsonData) throws JSONException {
+        JSONObject quote = new JSONObject(jsonData);
+        String theQuote = quote.getString("quote");
+        return  theQuote;
     }
 
     /**
@@ -249,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateDisplay() {
         mCurrentDate.setText(getDateInIcelandic());
-        mQuoteText.setText(quoteOfTheDay.getText());
+        mQuoteText.setText("„" + quoteOfTheDay.getText() + "“");
         mQuoteSubText.setText(quoteOfTheDay.getNovel() + ", " + quoteOfTheDay.getYear());
     }
 
@@ -285,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
                 // toggleRefresh();
             }
         });
-        alertUserAboutError();
+        alertUserAbuoterror();
 
     }
 }
