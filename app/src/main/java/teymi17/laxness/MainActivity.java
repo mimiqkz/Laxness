@@ -85,9 +85,6 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,broadcast);
         getQuote();
 
-
-
-        shareButton = (ImageButton)findViewById(R.id.shareButton);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,7 +200,6 @@ public class MainActivity extends AppCompatActivity {
         quote.setNovel(getNovelName(jsonData));
         quote.setYear(getYearQuote(jsonData));
         quote.setText(getTextQuote(jsonData));
-
         return quote;
     }
 
