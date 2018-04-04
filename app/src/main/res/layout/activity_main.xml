@@ -1,42 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical" >
+    android:background="@color/yellowSecondary"
+    android:orientation="vertical">
 
-
-
-    <TextView
-        android:id="@+id/quote_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="24dp" />
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:paddingVertical="20dp"
+        android:src="@drawable/ic_laxness"
+        />
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:paddingHorizontal="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/quote_novel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+            android:id="@+id/todays_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dagsetning"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="5dp"
+            android:clipToPadding="false"/>
         <TextView
+            android:id="@+id/quote_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/quote_date" />
+            android:background="@drawable/quotebox_rounded"
+            android:gravity="center"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="20dp"
+            android:lineSpacingExtra="6dp"
+            android:textStyle="italic"
+            android:textColor="#000"
+            android:textSize="16dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"/>
+            <TextView
+                android:id="@+id/quote_subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="300dp"
+                android:textAlignment="textEnd"
+                android:padding="8dp"
+                android:textStyle="italic"
+                android:background="@drawable/quote_info_rounded"
+                android:textColor="#fff" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"/>
+        </LinearLayout>
 
+        <View
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_marginVertical="20dp"
+            android:background="@color/brownPrimary"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_share_txt"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:clipToPadding="false"/>
+        <ImageButton
+            android:id="@+id/shareButton"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:src="@drawable/ic_share_icon"
+            android:background="@android:color/transparent" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/shareButton"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="share"/>
 
 </LinearLayout>

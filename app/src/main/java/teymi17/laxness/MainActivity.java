@@ -1,6 +1,8 @@
 package teymi17.laxness;
 
 import android.graphics.Bitmap;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +12,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.File;
@@ -19,27 +21,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import android.widget.Toast;
-import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -47,7 +37,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import teymi17.laxness.model.Quote;
 
@@ -56,25 +49,32 @@ public class MainActivity extends AppCompatActivity {
     private Quote quoteOfTheDay;
     public static final String TAG = MainActivity.class.getSimpleName();
 
-
-
     //View Variables
-    Button shareButton;
-    private TextView mQuoteText;
-    private TextView mQuoteNovel;
-    private TextView mQuoteDate;
+    @BindView(R.id.shareButton)
+    ImageButton shareButton;
+
+    @BindView(R.id.todays_date)
+    TextView mCurrentDate;
+
+    @BindView(R.id.quote_text)
+    TextView mQuoteText;
+
+    @BindView(R.id.quote_subtext)
+    TextView mQuoteSubText;
+
+
     File imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         // Sends a notification each day at a specific time
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
         Calendar calendar = Calendar.getInstance();
-        //calendar.add(Calendar.SECOND, 5);
         calendar.set(Calendar.HOUR_OF_DAY,12);
         calendar.set(Calendar.MINUTE,0);
         calendar.set(Calendar.SECOND,0);
@@ -82,49 +82,36 @@ public class MainActivity extends AppCompatActivity {
         final Intent intent = new Intent("Team17.Laxness.DISPLAY_NOTIFICATION");
         PendingIntent broadcast = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
-        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), broadcast);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,broadcast);
+        getQuote();
 
-        //Call function that finds and sets quote
-        quoteOfTheDay = new Quote("dddddd dapur heimurinn.", "Barn ssssss,", "19");
-        getQoute();
-        mQuoteText = (TextView) findViewById(R.id.quote_text);
-        mQuoteNovel = (TextView) findViewById(R.id.quote_novel);
-        mQuoteDate = (TextView) findViewById(R.id.quote_date);
 
-        mQuoteText.setText(quoteOfTheDay.getText());
-        mQuoteNovel.setText(quoteOfTheDay.getNovel());
-        mQuoteDate.setText(" " + String.valueOf(quoteOfTheDay.getYear()));
-        getQoute();
 
-        shareButton = (Button)findViewById(R.id.shareButton);
+        shareButton = (ImageButton)findViewById(R.id.shareButton);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bitmap bitmap = takeScreenshot();
                 saveBitmap(bitmap);
                 shareIt();
-
-
-                /*Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareQuote = quoteOfTheDay.getText() +" \t\t "+ quoteOfTheDay.getNovel() + " " + String.valueOf(quoteOfTheDay.getYear());
-                String shareNovel = quoteOfTheDay.getNovel();
-                String shareDate = " " + String.valueOf(quoteOfTheDay.getYear());
-                myIntent.putExtra(intent.EXTRA_SUBJECT,"Laxness, tilvitnun dagsins");
-                myIntent.putExtra(Intent.EXTRA_TEXT,shareQuote);
-                startActivity(Intent.createChooser(myIntent,"Share using"));
-*/
-            }
+              }
         });
 
+    }
+
+
+    public static String getDateInIcelandic() {
+        Locale icelandicLocale = new Locale("is");
+        Date currentDate = new Date();
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL, icelandicLocale);
+        return dateFormat.format(currentDate).toString();
     }
 
     /**
      * takes in id and gets data from api
      * and then renders sed data
      */
-    private void getQoute() {
+    private void getQuote() {
         String qouteUrl = "https://laxnessapi.herokuapp.com/api/today";
         System.out.println(qouteUrl);
         if (isNetworkAvailable()) {
@@ -184,22 +171,9 @@ public class MainActivity extends AppCompatActivity {
             // Toast.makeText(this, R.string.network_unavailable_message, Toast.LENGTH_LONG).show();
         }
     }
-    /*private void toggleRefresh() {
-      /* if(mQuoteText.getVisibility()== View.INVISIBLE){
-           mQuoteText.setVisibility(View.INVISIBLE);
-           mQuoteNovel.setVisibility(View.INVISIBLE);
-           mQuoteDate.setVisibility(View.INVISIBLE);
-        }
-        else {
-           mQuoteNovel.setVisibility(View.VISIBLE);
-           mQuoteText.setVisibility(View.VISIBLE);
-           mQuoteDate.setVisibility(View.VISIBLE);
-
-       }
-    }*/
 
     /**
-     * function thets checs for network avalibility
+     * function that checks for network availability
      * @return true if there is network avalable
      */
     private boolean isNetworkAvailable() {
@@ -274,13 +248,9 @@ public class MainActivity extends AppCompatActivity {
      * updates the display
      */
     private void updateDisplay() {
-        mQuoteText = (TextView) findViewById(R.id.quote_text);
-        mQuoteNovel = (TextView) findViewById(R.id.quote_novel);
-        mQuoteDate = (TextView) findViewById(R.id.quote_date);
-        System.out.println("here in update "+ quoteOfTheDay.getText());
+        mCurrentDate.setText(getDateInIcelandic());
         mQuoteText.setText(quoteOfTheDay.getText());
-        mQuoteNovel.setText(quoteOfTheDay.getNovel());
-        mQuoteDate.setText(" " + String.valueOf(quoteOfTheDay.getYear()));
+        mQuoteSubText.setText(quoteOfTheDay.getNovel() + ", " + quoteOfTheDay.getYear());
     }
 
     public Bitmap takeScreenshot(){

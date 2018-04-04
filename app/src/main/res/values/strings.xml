@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Laxness</string>
+    <string name="app_name">Tilvitnun Dagsins</string>
+    <string name="app_share_txt">Deildu tilvitnuninni</string>
 </resources>
