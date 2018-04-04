@@ -3,13 +3,17 @@
  
  ## Design
  The backend of the application is connected to the [API](https://github.com/mimiqkz/laxnessapi) in which the server is hosted on Heroku.
- Below is a simple diagram to show the structure of the application.
+ Below is a simple diagram to show the inital design structure of the application.
  <p align="center">
   <img width="50%" alt="capture" src="https://user-images.githubusercontent.com/19761446/38315377-e2e76b5e-3817-11e8-9d1f-db8c5d0dd3ba.jpg">
  </p>
  
 The UI of the application is designed with the inspiration of the *Gljúfrasteinn* website, while incorporating Android UI design principles.
 
+ <p align="center">
+  <img width="100%" alt="capture" src="https://user-images.githubusercontent.com/19761446/38317049-adf28d94-381b-11e8-877d-f13483c02a56.png">
+ </p>
+ 
  <p align="center">
   <img width="30%" alt="capture" src="https://user-images.githubusercontent.com/19761446/38314410-a405af6a-3815-11e8-8348-d5c85804d191.png">
  </p>
