@@ -89,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Bitmap bitmap = takeScreenshot();
-                saveBitmap(bitmap);
+                Bitmap croppedBitmap = Bitmap.createBitmap(bitmap, 0, (int)(bitmap.getHeight() * 0.05), bitmap.getWidth(),(int)(bitmap.getHeight()*0.6));
+                saveBitmap(croppedBitmap);
                 shareIt();
               }
         });
@@ -273,14 +274,8 @@ public class MainActivity extends AppCompatActivity {
         sharingIntent.setType("image/*");
         sharingIntent.putExtra(Intent.EXTRA_STREAM,uri);
 
-        startActivity(Intent.createChooser(sharingIntent,"Share via"));
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // toggleRefresh();
-            }
-        });
-        alertUserAbuoterror();
+
+        startActivity(Intent.createChooser(sharingIntent,"Deildu með"));
 
     }
 }
