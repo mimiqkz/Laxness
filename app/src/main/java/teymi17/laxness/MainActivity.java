@@ -1,10 +1,15 @@
 package teymi17.laxness;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.AlarmManager;
@@ -38,8 +43,10 @@ import okhttp3.Response;
 
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import teymi17.laxness.model.Quote;
@@ -69,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
 
         // Sends a notification each day at a specific time
@@ -88,11 +96,12 @@ public class MainActivity extends AppCompatActivity {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkAndRequestPermissions()){
                 Bitmap bitmap = takeScreenshot();
                 Bitmap croppedBitmap = Bitmap.createBitmap(bitmap, 0, (int)(bitmap.getHeight() * 0.05), bitmap.getWidth(),(int)(bitmap.getHeight()*0.6));
                 saveBitmap(croppedBitmap);
                 shareIt();
-              }
+              }}
         });
 
     }
@@ -277,6 +286,28 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(Intent.createChooser(sharingIntent,"Deildu með"));
 
+    }
+
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
+
+    private  boolean checkAndRequestPermissions() {
+        int writeStorage = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int readStorage = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (writeStorage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (readStorage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (!listPermissionsNeeded.isEmpty())
+        {
+            ActivityCompat.requestPermissions(this,listPermissionsNeeded.toArray
+                    (new String[listPermissionsNeeded.size()]),REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
     }
 }
 
